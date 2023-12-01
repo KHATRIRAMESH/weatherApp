@@ -8,6 +8,13 @@ function Inputs({ setQuery, setUnits, units, lat, setLat }) {
     if (city !== "") setQuery({ q: city });
   };
 
+  const handleUnitsChange = (e) => {
+    const selectedUnit = e.currentTarget.name;
+    if (units !== selectedUnit) {
+      // console.log(selectedUnit);
+      setUnits(selectedUnit);
+    }
+  };
   const handleLocationClick = () => {
     if (navigator.geoLocation) {
       navigator.geoLocation.getCurrentPosition((position) => {
@@ -20,7 +27,6 @@ function Inputs({ setQuery, setUnits, units, lat, setLat }) {
         // setQuery({ lat, lon });
       });
     } else console.log("failed to load");
-    
   };
   return (
     <div className="flex flex-row justify-center my-6 ">
@@ -50,6 +56,7 @@ function Inputs({ setQuery, setUnits, units, lat, setLat }) {
         <button
           name="metric"
           className="text-xl text-white font-light transition ease-out hover:scale-125"
+          onClick={handleUnitsChange}
         >
           °C
         </button>
@@ -57,6 +64,7 @@ function Inputs({ setQuery, setUnits, units, lat, setLat }) {
         <button
           name="imperial"
           className="text-xl text-white font-light transition ease-out hover:scale-125"
+          onClick={handleUnitsChange}
         >
           °F
         </button>

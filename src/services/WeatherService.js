@@ -2,17 +2,22 @@ import { DateTime } from "luxon";
 
 const API_KEY = "5f9b3d9a7c0cac9f5139f5fd167e85b6";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
-const system = "metric";
 
 const getWeatherData = (infoType, searchParams) => {
   const url = new URL(BASE_URL + "/" + infoType);
+  // console.log(url);
   url.search = new URLSearchParams({
-    ...searchParams,
     appid: API_KEY,
-    units: system,
+    ...searchParams,
+    
   });
-
-  return fetch(url).then((res) => res.json());
+  // console.log(url);
+fetch(url)
+  return fetch(url).then((res) =>
+    // console.log(res.json());
+    res.json()
+  
+  );
 };
 
 const formatCurrentWeather = (data) => {
@@ -57,6 +62,7 @@ const getFormattedWeatherData = async (searchParams) => {
     "weather",
     searchParams
   ).then(formatCurrentWeather);
+  // console.log(searchParams);
   return formattedCurrentWeather;
 };
 

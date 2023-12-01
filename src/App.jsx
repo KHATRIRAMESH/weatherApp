@@ -2,7 +2,6 @@ import TopButton from "./components/TopButton";
 import Inputs from "./components/Inputs";
 import TimeAndLocation from "./components/TimeAndLocation";
 import TemperatureAndDetails from "./components/TemperatureAndDetails";
-import Forecast from "./components/Forecast";
 import getFormattedWeatherData from "./services/WeatherService";
 import { useEffect, useState } from "react";
 
@@ -13,15 +12,19 @@ function App() {
 
   useEffect(() => {
     const fetchWeather = async () => {
+      // console.log({ ...query, units });
       await getFormattedWeatherData({ ...query, units }).then((data) => {
         setWeather(data);
+        // console.log(data);
       });
     };
     fetchWeather();
   }, [query, units]);
 
   return (
-    <div className="mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400">
+    <div
+      className=" mx-auto max-w-screen-2xl max-h-screen mt-4 py-5 px-32 bg-gradient-to-br from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400 back"
+    >
       <TopButton setQuery={setQuery} />
       <Inputs setQuery={setQuery} setUnits={setUnits} units={units} />
       {weather && (
@@ -33,7 +36,6 @@ function App() {
 
       {/* <Forecast title="hourly forecast" />
       <Forecast title="Daily forecast" /> */}
-      
     </div>
   );
 }
